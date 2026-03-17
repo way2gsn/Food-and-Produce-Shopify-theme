@@ -1,0 +1,97 @@
+{{ 'phasal-home.css' | asset_url | stylesheet_tag }}
+
+<section class="phasal-home phasal-trust">
+  <div class="phasal-home__inner phasal-trust__grid">
+    {%- for block in section.blocks -%}
+      <div class="phasal-trust__item" {{ block.shopify_attributes }}>
+        <div class="phasal-trust__icon">{{ block.settings.icon | escape }}</div>
+        <div>
+          <h2 class="phasal-trust__title">{{ block.settings.title | escape }}</h2>
+          {%- if block.settings.copy != blank -%}
+            <p class="phasal-trust__copy">{{ block.settings.copy | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Phasal Trust Bar",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon or emoji",
+          "default": "🌾"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Farm Direct"
+        },
+        {
+          "type": "text",
+          "id": "copy",
+          "label": "Copy",
+          "default": "No middlemen, full traceability"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Phasal Trust Bar",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "icon": "🌾",
+            "title": "Farm Direct",
+            "copy": "No middlemen, full traceability"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "🪨",
+            "title": "Stone Ground",
+            "copy": "Traditional chakki milling"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "🌿",
+            "title": "Zero Chemicals",
+            "copy": "Pesticide and additive free"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "🧪",
+            "title": "Lab Tested",
+            "copy": "Every batch certified"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "📦",
+            "title": "Pan India Delivery",
+            "copy": "Free above Rs. 499"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

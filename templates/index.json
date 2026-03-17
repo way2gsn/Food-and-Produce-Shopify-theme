@@ -1,0 +1,274 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "phasal_ticker": {
+      "type": "phasal-ticker",
+      "blocks": {
+        "message_1": {
+          "type": "message",
+          "settings": {
+            "text": "72,000+ Farmers Network - Direct from Chhattisgarh"
+          }
+        },
+        "message_2": {
+          "type": "message",
+          "settings": {
+            "text": "Use code PHASAL10 - 10% Off Your First Order"
+          }
+        },
+        "message_3": {
+          "type": "message",
+          "settings": {
+            "text": "100% Organic Millets - Stone-Ground and Unpolished"
+          }
+        },
+        "message_4": {
+          "type": "message",
+          "settings": {
+            "text": "Cold-Pressed Oils - No Heat, No Chemicals"
+          }
+        },
+        "message_5": {
+          "type": "message",
+          "settings": {
+            "text": "Free Delivery on Orders Above Rs. 499"
+          }
+        }
+      },
+      "block_order": [
+        "message_1",
+        "message_2",
+        "message_3",
+        "message_4",
+        "message_5"
+      ],
+      "settings": {
+        "accessibility_label": "Store announcements"
+      }
+    },
+    "phasal_hero": {
+      "type": "phasal-hero",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "72K+",
+            "label": "Farmer Partners"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "9",
+            "label": "Millet Varieties"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "4.9★",
+            "label": "Rating"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "Organic"
+          }
+        },
+        "product_card_1": {
+          "type": "product_card",
+          "settings": {
+            "title": "Kodo Millet (Whole Grain)",
+            "copy": "Pure and unrefined - Low GI - Rich in fiber",
+            "price": "Rs. 180",
+            "price_unit": "/ 500g"
+          }
+        },
+        "product_card_2": {
+          "type": "product_card",
+          "settings": {
+            "title": "Mustard Oil - Kachi Ghani",
+            "copy": "Cold-Pressed - 100% Pure - MUFA rich",
+            "price": "Rs. 320",
+            "price_unit": "/ 1L"
+          }
+        },
+        "feature_card_1": {
+          "type": "feature_card",
+          "settings": {
+            "title": "Millet Processing Unit - Dongitara, Raigarh",
+            "copy": "From field to pack - Zero additives - Full traceability",
+            "link_label": "Visit Farm"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "product_card_1",
+        "product_card_2",
+        "feature_card_1"
+      ],
+      "settings": {
+        "eyebrow": "Ganwai Collection 2025",
+        "meta": "72,000+ Farmers - Chhattisgarh",
+        "heading_line_1": "Ancient Grains,",
+        "heading_line_2": "Direct from the",
+        "heading_line_3": "Heart of India",
+        "subheading": "Discover the purest organic millets and cold-pressed oils, sourced directly from farmer networks to your table. Your healthy choice supports rural communities.",
+        "primary_button_label": "Shop All Millets",
+        "primary_button_link": "shopify://collections/all",
+        "secondary_button_label": "Learn Our Story",
+        "secondary_button_link": "shopify://pages/about"
+      }
+    },
+    "phasal_trust": {
+      "type": "phasal-trust-bar",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "🌾",
+            "title": "Farm Direct",
+            "copy": "No middlemen, full traceability"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "🪨",
+            "title": "Stone Ground",
+            "copy": "Traditional chakki milling"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "🌿",
+            "title": "Zero Chemicals",
+            "copy": "Pesticide and additive free"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "🧪",
+            "title": "Lab Tested",
+            "copy": "Every batch certified"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "icon": "📦",
+            "title": "Pan India Delivery",
+            "copy": "Free above Rs. 499"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+      ],
+      "settings": {}
+    },
+    "phasal_impact": {
+      "type": "phasal-impact-stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "72,000+",
+            "label": "Farmer Partners"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "18",
+            "label": "Districts in CG"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "9",
+            "label": "Millet Varieties"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "Rs. 40Cr+",
+            "label": "Farmer Earnings"
+          }
+        },
+        "stat_5": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "Organic Certified"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "stat_5"
+      ],
+      "settings": {}
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "phasal_ticker",
+    "phasal_hero",
+    "phasal_trust",
+    "phasal_impact",
+    "featured_collection"
+  ]
+}

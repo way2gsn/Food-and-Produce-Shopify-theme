@@ -1,0 +1,79 @@
+{{ 'phasal-home.css' | asset_url | stylesheet_tag }}
+
+<section class="phasal-home phasal-ticker" aria-label="{{ section.settings.accessibility_label | escape }}">
+  <div class="phasal-ticker__track">
+    {%- for repeat in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <div class="phasal-ticker__item" {{ block.shopify_attributes }}>
+          {{ block.settings.text | escape }}
+        </div>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Phasal Ticker",
+  "settings": [
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Store announcements"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "72,000+ Farmers Network - Direct from Chhattisgarh"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Phasal Ticker",
+      "blocks": [
+        {
+          "type": "message",
+          "settings": {
+            "text": "72,000+ Farmers Network - Direct from Chhattisgarh"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "Use code PHASAL10 - 10% Off Your First Order"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "100% Organic Millets - Stone-Ground and Unpolished"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "Cold-Pressed Oils - No Heat, No Chemicals"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "Free Delivery on Orders Above Rs. 499"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,81 @@
+{{ 'phasal-home.css' | asset_url | stylesheet_tag }}
+
+<section class="phasal-home phasal-impact">
+  <div class="phasal-home__inner phasal-impact__grid">
+    {%- for block in section.blocks -%}
+      <div class="phasal-impact__item" {{ block.shopify_attributes }}>
+        <div class="phasal-impact__number">{{ block.settings.number | escape }}</div>
+        <div class="phasal-impact__label">{{ block.settings.label | escape }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Phasal Impact Stats",
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "72,000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Farmer Partners"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Phasal Impact Stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "72,000+",
+            "label": "Farmer Partners"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "18",
+            "label": "Districts in CG"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "9",
+            "label": "Millet Varieties"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "Rs. 40Cr+",
+            "label": "Farmer Earnings"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "Organic Certified"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

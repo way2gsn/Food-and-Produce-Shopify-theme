@@ -1,0 +1,357 @@
+{{ 'phasal-home.css' | asset_url | stylesheet_tag }}
+
+<section class="phasal-home phasal-hero">
+  <div class="phasal-hero__media">
+    {%- if section.settings.background_image != blank -%}
+      {{
+        section.settings.background_image
+        | image_url: width: 2400
+        | image_tag:
+          widths: '750, 1100, 1500, 2000, 2400',
+          sizes: '100vw',
+          loading: 'eager'
+      }}
+    {%- endif -%}
+  </div>
+  <div class="phasal-hero__overlay"></div>
+
+  <div class="phasal-hero__inner">
+    <div class="phasal-hero__content">
+      <div class="phasal-hero__badges">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="phasal-hero__badge">
+            <span class="phasal-hero__badge-dot"></span>
+            {{ section.settings.eyebrow | escape }}
+          </span>
+        {%- endif -%}
+        {%- if section.settings.meta != blank -%}
+          <span class="phasal-hero__meta">{{ section.settings.meta | escape }}</span>
+        {%- endif -%}
+      </div>
+
+      <h1 class="phasal-hero__title">
+        {{ section.settings.heading_line_1 | escape }}<br>
+        <span class="phasal-hero__title-accent">{{ section.settings.heading_line_2 | escape }}</span><br>
+        <span class="phasal-hero__title-highlight">{{ section.settings.heading_line_3 | escape }}</span>
+      </h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="phasal-hero__subtitle">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+
+      <div class="phasal-hero__actions">
+        {%- if section.settings.primary_button_label != blank -%}
+          <a class="phasal-home__button phasal-home__button--primary" href="{{ section.settings.primary_button_link | default: routes.all_products_collection_url }}">
+            {{ section.settings.primary_button_label | escape }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_button_label != blank -%}
+          <a class="phasal-home__button phasal-home__button--secondary" href="{{ section.settings.secondary_button_link | default: routes.root_url }}">
+            {{ section.settings.secondary_button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- assign stat_blocks = section.blocks | where: 'type', 'stat' -%}
+      {%- if stat_blocks.size > 0 -%}
+        <div class="phasal-hero__stats">
+          {%- for block in stat_blocks limit: 4 -%}
+            <div {{ block.shopify_attributes }}>
+              <div class="phasal-hero__stat-number">{{ block.settings.number | escape }}</div>
+              <div class="phasal-hero__stat-label">{{ block.settings.label | escape }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="phasal-hero__cards">
+      {%- assign product_blocks = section.blocks | where: 'type', 'product_card' -%}
+      {%- if product_blocks.size > 0 -%}
+        <div class="phasal-hero__card-grid">
+          {%- for block in product_blocks limit: 2 -%}
+            <article class="phasal-hero-card" {{ block.shopify_attributes }}>
+              <div class="phasal-hero-card__image">
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 900
+                    | image_tag:
+                      widths: '360, 540, 720, 900',
+                      sizes: '(max-width: 749px) 100vw, 28vw'
+                  }}
+                {%- endif -%}
+              </div>
+              <div class="phasal-hero-card__body">
+                <h2 class="phasal-hero-card__title">{{ block.settings.title | escape }}</h2>
+                {%- if block.settings.copy != blank -%}
+                  <p class="phasal-hero-card__copy">{{ block.settings.copy | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.price != blank -%}
+                  <div class="phasal-hero-card__price">
+                    {{ block.settings.price | escape }}
+                    {%- if block.settings.price_unit != blank -%}
+                      <span class="phasal-hero-card__price-unit">{{ block.settings.price_unit | escape }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- assign feature_blocks = section.blocks | where: 'type', 'feature_card' -%}
+      {%- for block in feature_blocks limit: 1 -%}
+        <article class="phasal-hero-card phasal-hero-card--feature" {{ block.shopify_attributes }}>
+          <div class="phasal-hero-card__image">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1600
+                | image_tag:
+                  widths: '540, 900, 1200, 1600',
+                  sizes: '(max-width: 749px) 100vw, 38vw'
+              }}
+            {%- endif -%}
+          </div>
+          <div class="phasal-hero-card__body">
+            <div>
+              <h2 class="phasal-hero-card__title">{{ block.settings.title | escape }}</h2>
+              {%- if block.settings.copy != blank -%}
+                <p class="phasal-hero-card__copy">{{ block.settings.copy | escape }}</p>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.link_label != blank -%}
+              <a class="phasal-hero-card__link" href="{{ block.settings.link | default: routes.root_url }}">
+                {{ block.settings.link_label | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Phasal Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow badge",
+      "default": "Ganwai Collection 2025"
+    },
+    {
+      "type": "text",
+      "id": "meta",
+      "label": "Meta badge",
+      "default": "72,000+ Farmers - Chhattisgarh"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Ancient Grains,"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "Direct from the"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading line 3",
+      "default": "Heart of India"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Discover the purest organic millets and cold-pressed oils, sourced directly from farmer networks to your table. Your healthy choice supports rural communities."
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Primary button label",
+      "default": "Shop All Millets"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary button label",
+      "default": "Learn Our Story"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "72K+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Farmer Partners"
+        }
+      ]
+    },
+    {
+      "type": "product_card",
+      "name": "Product card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Kodo Millet (Whole Grain)"
+        },
+        {
+          "type": "text",
+          "id": "copy",
+          "label": "Copy",
+          "default": "Pure and unrefined - Low GI - Rich in fiber"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "Rs. 180"
+        },
+        {
+          "type": "text",
+          "id": "price_unit",
+          "label": "Price unit",
+          "default": "/ 500g"
+        }
+      ]
+    },
+    {
+      "type": "feature_card",
+      "name": "Feature card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Millet Processing Unit - Dongitara, Raigarh"
+        },
+        {
+          "type": "text",
+          "id": "copy",
+          "label": "Copy",
+          "default": "From field to pack - Zero additives - Full traceability"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Visit Farm"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 7,
+  "presets": [
+    {
+      "name": "Phasal Hero",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "72K+",
+            "label": "Farmer Partners"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "9",
+            "label": "Millet Varieties"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4.9★",
+            "label": "Rating"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "Organic"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "Kodo Millet (Whole Grain)",
+            "copy": "Pure and unrefined - Low GI - Rich in fiber",
+            "price": "Rs. 180",
+            "price_unit": "/ 500g"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "Mustard Oil - Kachi Ghani",
+            "copy": "Cold-Pressed - 100% Pure - MUFA rich",
+            "price": "Rs. 320",
+            "price_unit": "/ 1L"
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "Millet Processing Unit - Dongitara, Raigarh",
+            "copy": "From field to pack - Zero additives - Full traceability",
+            "link_label": "Visit Farm"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
