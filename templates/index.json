@@ -90,7 +90,8 @@
           "settings": {
             "title": "Millet Processing Unit - Dongitara, Raigarh",
             "copy": "From field to pack - Zero additives - Full traceability",
-            "link_label": "Visit Farm"
+            "link_label": "Visit Farm",
+            "link": ""
           }
         }
       },
@@ -104,7 +105,7 @@
       "settings": {
         "eyebrow": "Ganwai Collection 2025",
         "meta": "72,000+ Farmers - Chhattisgarh",
-        "product_collection": "all",
+        "product_collection": "our-farm-fresh-favorites",
         "heading_line_1": "Ancient Grains,",
         "heading_line_2": "Direct from the",
         "heading_line_3": "Heart of India",
@@ -219,6 +220,54 @@
     "phasal_collection_pills": {
       "type": "phasal-collection-pills",
       "blocks": {
+        "collection_WpxE6D": {
+          "type": "collection",
+          "settings": {
+            "collection": "snacks",
+            "icon": "🌾",
+            "highlight": false
+          }
+        },
+        "collection_VBfnxR": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "icon": "🌾",
+            "highlight": false
+          }
+        },
+        "collection_weY3gj": {
+          "type": "collection",
+          "settings": {
+            "collection": "poha",
+            "icon": "🌾",
+            "highlight": false
+          }
+        },
+        "collection_TXr7yF": {
+          "type": "collection",
+          "settings": {
+            "collection": "millets-rice",
+            "icon": "🌾",
+            "highlight": false
+          }
+        },
+        "collection_XMWxkK": {
+          "type": "collection",
+          "settings": {
+            "collection": "dals-pulses",
+            "icon": "🌾",
+            "highlight": false
+          }
+        },
+        "collection_JhE8Mi": {
+          "type": "collection",
+          "settings": {
+            "collection": "cookies-and-snacks",
+            "icon": "🌾",
+            "highlight": false
+          }
+        },
         "collection_1": {
           "type": "collection",
           "settings": {
@@ -229,6 +278,12 @@
         }
       },
       "block_order": [
+        "collection_WpxE6D",
+        "collection_VBfnxR",
+        "collection_weY3gj",
+        "collection_TXr7yF",
+        "collection_XMWxkK",
+        "collection_JhE8Mi",
         "collection_1"
       ],
       "settings": {
@@ -248,7 +303,8 @@
         "collection": "all",
         "products_to_show": 4,
         "default_badge": "72K+ network",
-        "link_label": "View collection"
+        "link_label": "View collection",
+        "link": ""
       }
     },
     "phasal_wide_banner": {
