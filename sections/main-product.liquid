@@ -1,6 +1,6 @@
 <product-info
   id="MainProduct-{{ section.id }}"
-  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} phasal-product-page"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
@@ -15,6 +15,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'phasal-product.css' | asset_url | stylesheet_tag }}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -478,13 +479,25 @@
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
-                {%- render 'buy-buttons',
-                  block: block,
-                  product: product,
-                  product_form_id: product_form_id,
-                  section_id: section.id,
-                  show_pickup_availability: true
-                -%}
+                <div class="phasal-product__cta" {{ block.shopify_attributes }}>
+                  {%- render 'buy-buttons',
+                    block: block,
+                    product: product,
+                    product_form_id: product_form_id,
+                    section_id: section.id,
+                    show_pickup_availability: true
+                  -%}
+                  {%- if section.settings.bulk_order_label != blank -%}
+                    <div class="phasal-product__bulk">
+                      <a class="phasal-product__bulk-link" href="{{ section.settings.bulk_order_link | default: routes.root_url }}">
+                        {{ section.settings.bulk_order_label | escape }}
+                      </a>
+                    </div>
+                  {%- endif -%}
+                  {%- if section.settings.bulk_order_note != blank -%}
+                    <div class="phasal-product__bulk-note">{{ section.settings.bulk_order_note }}</div>
+                  {%- endif -%}
+                </div>
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -676,11 +689,60 @@
                 {% render 'icon-with-text', block: block %}
             {%- endcase -%}
           {%- endfor -%}
+          {%- if product.tags.size > 0 -%}
+            <div class="phasal-product__badges">
+              {%- for tag in product.tags limit: 3 -%}
+                <span class="phasal-product__badge">{{ tag | escape }}</span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
             {{ 'products.product.view_full_details' | t }}
             {{- 'icon-arrow.svg' | inline_asset_content -}}
           </a>
         </section>
+      </div>
+    </div>
+
+    <div class="phasal-product__extras">
+      <div class="phasal-product__section">
+        <h2>{{ section.settings.details_heading }}</h2>
+        <p>
+          {%- if section.settings.details_text != blank -%}
+            {{ section.settings.details_text }}
+          {%- else -%}
+            {{ product.description | strip_html | truncate: 240 }}
+          {%- endif -%}
+        </p>
+      </div>
+
+      <div class="phasal-product__section phasal-product__story">
+        <div class="phasal-product__story-image">
+          {%- if section.settings.story_image != blank -%}
+            {{
+              section.settings.story_image
+              | image_url: width: 1600
+              | image_tag:
+                widths: '540, 900, 1200, 1600',
+                sizes: '(max-width: 989px) 100vw, 50vw',
+                loading: 'lazy'
+            }}
+          {%- else -%}
+            <img src="{{ 'farm_banner.png' | asset_url }}" alt="{{ section.settings.story_heading | escape }}">
+          {%- endif -%}
+        </div>
+        <div>
+          <h2>{{ section.settings.story_heading }}</h2>
+          <p>{{ section.settings.story_text }}</p>
+        </div>
+      </div>
+
+      <div class="phasal-product__section">
+        <h2>{{ section.settings.reviews_heading }}</h2>
+        <div class="phasal-product__reviews">
+          <div class="phasal-product__review">{{ section.settings.review_1 }}</div>
+          <div class="phasal-product__review">{{ section.settings.review_2 }}</div>
+        </div>
       </div>
     </div>
 
@@ -2262,6 +2324,73 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Custom content"
+    },
+    {
+      "type": "text",
+      "id": "bulk_order_label",
+      "label": "Bulk order button label",
+      "default": "Bulk Order"
+    },
+    {
+      "type": "url",
+      "id": "bulk_order_link",
+      "label": "Bulk order link"
+    },
+    {
+      "type": "textarea",
+      "id": "bulk_order_note",
+      "label": "Bulk order note",
+      "default": "Need larger quantities for business or events? Get special pricing on bulk orders."
+    },
+    {
+      "type": "text",
+      "id": "details_heading",
+      "label": "Details heading",
+      "default": "Product Details"
+    },
+    {
+      "type": "textarea",
+      "id": "details_text",
+      "label": "Details text"
+    },
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Story image"
+    },
+    {
+      "type": "text",
+      "id": "story_heading",
+      "label": "Story heading",
+      "default": "From Farm to You"
+    },
+    {
+      "type": "textarea",
+      "id": "story_text",
+      "label": "Story text",
+      "default": "This product supports local farmers and sustainable agriculture practices in India."
+    },
+    {
+      "type": "text",
+      "id": "reviews_heading",
+      "label": "Reviews heading",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "textarea",
+      "id": "review_1",
+      "label": "Review 1",
+      "default": "\"Excellent quality!\""
+    },
+    {
+      "type": "textarea",
+      "id": "review_2",
+      "label": "Review 2",
+      "default": "\"Very fresh and clean.\""
     }
   ]
 }

@@ -45,6 +45,17 @@
       </div>
     </div>
 
+    {%- if section.settings.footer_menu_3 != blank -%}
+      <div>
+        <h2 class="phasal-footer__heading">{{ section.settings.menu_heading_3 }}</h2>
+        <div class="phasal-footer__menu">
+          {%- for link in section.settings.footer_menu_3.links -%}
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
     <div class="phasal-footer__contact">
       <h2 class="phasal-footer__heading">{{ section.settings.contact_heading }}</h2>
       <p>{{ section.settings.contact_address }}</p>
@@ -109,6 +120,17 @@
       "type": "link_list",
       "id": "footer_menu_2",
       "label": "Footer menu 2"
+    },
+    {
+      "type": "text",
+      "id": "menu_heading_3",
+      "label": "Menu heading 3",
+      "default": "Resources"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_3",
+      "label": "Footer menu 3"
     },
     {
       "type": "text",

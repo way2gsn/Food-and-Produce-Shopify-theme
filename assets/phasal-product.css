@@ -1,0 +1,209 @@
+.phasal-product-page {
+  background: #f7f5ef;
+}
+
+.phasal-product-page .page-width {
+  max-width: 1200px;
+}
+
+.phasal-product-page .product {
+  gap: 5rem;
+  align-items: start;
+}
+
+.phasal-product-page .product__media-wrapper,
+.phasal-product-page .product__info-wrapper {
+  padding-top: 0;
+}
+
+.phasal-product-page .product__media-item,
+.phasal-product-page .product__media img,
+.phasal-product-page .product__media video,
+.phasal-product-page .product__media iframe {
+  border-radius: 2rem;
+}
+
+.phasal-product-page .product__media {
+  border: 1px solid #e6e2d9;
+  border-radius: 2rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+.phasal-product-page .thumbnail-list {
+  gap: 1rem;
+}
+
+.phasal-product-page .thumbnail {
+  border-radius: 1rem;
+  border: 1px solid #e6e2d9;
+  overflow: hidden;
+}
+
+.phasal-product-page .product__info-container {
+  padding: 0;
+}
+
+.phasal-product-page .product__text,
+.phasal-product-page .product__inventory,
+.phasal-product-page .product__tax,
+.phasal-product-page .product__sku,
+.phasal-product-page .share-button__button {
+  color: #777;
+}
+
+.phasal-product-page .product__title h1,
+.phasal-product-page .product__title .h1 {
+  margin: 1rem 0;
+  color: #1f3d2b;
+  font-size: 3.6rem;
+  line-height: 1.15;
+  font-family: 'Playfair Display', serif;
+}
+
+.phasal-product-page .price {
+  color: #1f3d2b;
+}
+
+.phasal-product-page .price-item {
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+.phasal-product-page .product-form__input--pill input[type='radio'] + label {
+  border-radius: 2rem;
+  border-color: #e6e2d9;
+  background: #fff;
+}
+
+.phasal-product-page .product-form__input--pill input[type='radio']:checked + label {
+  background: #1f3d2b;
+  border-color: #1f3d2b;
+  color: #fff;
+}
+
+.phasal-product-page .quantity {
+  border-radius: 3rem;
+}
+
+.phasal-product-page .quantity__button,
+.phasal-product-page .quantity__input {
+  min-height: 4.6rem;
+}
+
+.phasal-product-page .product-form__buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.phasal-product-page .product-form__submit {
+  flex: 1;
+  min-height: 5.2rem;
+  border-radius: 3rem;
+  background: #1f3d2b;
+  border-color: #1f3d2b;
+}
+
+.phasal-product-page .shopify-payment-button {
+  display: none;
+}
+
+.phasal-product__bulk {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.phasal-product__bulk-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.2rem;
+  padding: 1.2rem 1.8rem;
+  border: 1.5px solid #1f3d2b;
+  border-radius: 3rem;
+  color: #1f3d2b;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.phasal-product__bulk-note {
+  color: #777;
+  font-size: 1.35rem;
+  line-height: 1.6;
+}
+
+.phasal-product__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+
+.phasal-product__badge {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #e6e2d9;
+  border-radius: 2rem;
+  background: #fff;
+  font-size: 1.3rem;
+}
+
+.phasal-product__extras {
+  display: grid;
+  gap: 6rem;
+  margin-top: 6rem;
+}
+
+.phasal-product__section h2 {
+  margin: 0 0 1rem;
+  color: #1f3d2b;
+  font-size: 3rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.phasal-product__section p {
+  color: #777;
+  font-size: 1.6rem;
+  line-height: 1.7;
+}
+
+.phasal-product__story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.phasal-product__story-image img {
+  width: 100%;
+  border-radius: 2rem;
+  object-fit: cover;
+}
+
+.phasal-product__reviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.phasal-product__review {
+  padding: 2rem;
+  border: 1px solid #e6e2d9;
+  border-radius: 1.6rem;
+  background: #fff;
+  color: #333;
+  font-size: 1.45rem;
+  line-height: 1.65;
+}
+
+@media screen and (max-width: 989px) {
+  .phasal-product-page .product,
+  .phasal-product__story,
+  .phasal-product__reviews {
+    grid-template-columns: 1fr;
+  }
+}

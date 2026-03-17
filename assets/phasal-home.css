@@ -297,6 +297,12 @@
   box-shadow: 0 0.8rem 4rem rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(12px);
   text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.phasal-hero-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 1.6rem 4.6rem rgba(0, 0, 0, 0.24);
 }
 
 .phasal-hero-card__image {
