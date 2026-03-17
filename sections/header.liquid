@@ -21,7 +21,7 @@
             preload: true
         }}
       {%- else -%}
-        <span class="phasal-header__brand-name">{{ shop.name }}</span>
+        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
       {%- endif -%}
     </a>
 
@@ -59,13 +59,14 @@
           <span class="phasal-header__icon">{{ 'icon-account.svg' | inline_asset_content }}</span>
         </a>
       {%- endif -%}
-      <button class="phasal-header__icon-button" type="button" aria-label="Wishlist">
+      <button class="phasal-header__icon-button phasal-header__icon-button--wishlist" type="button" aria-label="Wishlist" data-phasal-wishlist-open>
         <span class="phasal-header__icon">{{ 'icon-heart.svg' | inline_asset_content }}</span>
+        <span class="phasal-header__wishlist-count" data-phasal-wishlist-count hidden>0</span>
       </button>
-      <a class="phasal-header__cart" href="{{ routes.cart_url }}">
+      <a class="phasal-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble">
         <span class="phasal-header__cart-icon">{{ 'icon-cart.svg' | inline_asset_content }}</span>
         <span>Cart</span>
-        <span class="phasal-header__cart-count">{{ cart.item_count }}</span>
+        <span class="phasal-header__cart-count" data-phasal-cart-count>{{ cart.item_count }}</span>
       </a>
     </div>
   </div>
@@ -79,6 +80,17 @@
         </a>
       {%- endfor -%}
     </nav>
+  </div>
+
+  <div class="phasal-wishlist" data-phasal-wishlist-panel>
+    <div class="phasal-wishlist__sheet">
+      <div class="phasal-wishlist__header">
+        <h2>Wishlist</h2>
+        <button type="button" data-phasal-wishlist-close aria-label="Close wishlist">×</button>
+      </div>
+      <p class="phasal-wishlist__empty" data-phasal-wishlist-empty>Your saved products will appear here.</p>
+      <div class="phasal-wishlist__list" data-phasal-wishlist-list></div>
+    </div>
   </div>
 </section>
 

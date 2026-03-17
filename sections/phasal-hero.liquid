@@ -15,6 +15,8 @@
           sizes: '100vw',
           loading: 'eager'
       }}
+    {%- else -%}
+      <img src="{{ 'hero_banner.png' | asset_url }}" alt="{{ section.settings.heading_line_1 | escape }}">
     {%- endif -%}
   </div>
   <div class="phasal-hero__overlay"></div>
@@ -74,7 +76,7 @@
         <div class="phasal-hero__card-grid">
           {%- for product in hero_products limit: 2 -%}
             {%- assign variant = product.selected_or_first_available_variant -%}
-            <article class="phasal-hero-card">
+            <a class="phasal-hero-card phasal-hero-card--linked" href="{{ product.url }}">
               <div class="phasal-hero-card__image">
                 {%- if product.featured_image != blank -%}
                   {{
@@ -106,7 +108,7 @@
                   </div>
                 {%- endif -%}
               </div>
-            </article>
+            </a>
           {%- endfor -%}
         </div>
       {%- endif -%}
@@ -123,6 +125,8 @@
                   widths: '540, 900, 1200, 1600',
                   sizes: '(max-width: 749px) 100vw, 38vw'
               }}
+            {%- else -%}
+              <img src="{{ 'farm_banner.png' | asset_url }}" alt="{{ block.settings.title | escape }}">
             {%- endif -%}
           </div>
           <div class="phasal-hero-card__body">

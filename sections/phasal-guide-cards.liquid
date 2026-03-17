@@ -26,6 +26,12 @@
                   sizes: '(max-width: 989px) 50vw, 33vw',
                   loading: 'lazy'
               }}
+            {%- elsif forloop.index == 1 -%}
+              <img src="{{ 'kodo_millet.png' | asset_url }}" alt="{{ block.settings.title | escape }}">
+            {%- elsif forloop.index == 2 -%}
+              <img src="{{ 'little_millet.png' | asset_url }}" alt="{{ block.settings.title | escape }}">
+            {%- else -%}
+              <img src="{{ 'alsi_oil.png' | asset_url }}" alt="{{ block.settings.title | escape }}">
             {%- endif -%}
           </div>
           <div class="phasal-guide-card__body">

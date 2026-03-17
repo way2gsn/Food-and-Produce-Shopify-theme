@@ -13,6 +13,8 @@
               sizes: '(max-width: 989px) 100vw, 50vw',
               loading: 'lazy'
           }}
+        {%- else -%}
+          <img src="{{ 'farm_banner.png' | asset_url }}" alt="{{ section.settings.title | escape }}">
         {%- endif -%}
         <div class="phasal-story__stats">
           <div>

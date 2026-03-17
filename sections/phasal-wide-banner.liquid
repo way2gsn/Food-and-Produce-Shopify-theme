@@ -13,6 +13,8 @@
               sizes: '100vw',
               loading: 'lazy'
           }}
+        {%- else -%}
+          <img src="{{ 'alsi_oil_wide.png' | asset_url }}" alt="{{ section.settings.eyebrow | escape }}">
         {%- endif -%}
       </div>
       <div class="phasal-banner__overlay"></div>

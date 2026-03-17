@@ -42,9 +42,22 @@
               assign badge_text = 'Organic'
             endif
           -%}
-          <article class="phasal-product-card">
+          <article class="phasal-product-card" data-phasal-product-card data-variant-id="{{ variant.id }}">
             <div class="phasal-product-card__media">
               <span class="phasal-product-card__badge {{ badge_class }}">{{ badge_text }}</span>
+              <button
+                class="phasal-product-card__wishlist"
+                type="button"
+                data-phasal-wishlist-toggle
+                data-product-id="{{ product.id }}"
+                data-product-title="{{ product.title | escape }}"
+                data-product-url="{{ product.url }}"
+                data-product-image="{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 360 }}{% endif %}"
+                data-product-price="{{ variant.price | money | escape }}"
+                aria-label="Add {{ product.title | escape }} to wishlist"
+              >
+                {{ 'icon-heart.svg' | inline_asset_content }}
+              </button>
               <a href="{{ product.url }}">
                 {%- if product.featured_image != blank -%}
                   {{
@@ -109,19 +122,22 @@
                 {%- if product.available == false -%}
                   <a class="phasal-product-card__options-link" href="{{ product.url }}" aria-label="View {{ product.title | escape }}">→</a>
                 {%- else -%}
-                  <form class="phasal-product-card__form" method="post" action="{{ routes.cart_add_url }}">
-                    <input type="hidden" name="id" value="{{ variant.id }}">
-                    <input type="hidden" name="quantity" value="1">
+                  <div class="phasal-product-card__form">
                     <button
                       id="PhasalCardAdd-{{ section.id }}-{{ product.id }}"
                       class="phasal-product-card__cart-button"
-                      type="submit"
-                      name="add"
+                      type="button"
+                      data-phasal-add
                       aria-label="Add {{ product.title | escape }} to cart"
                     >
                       <span>+</span>
                     </button>
-                  </form>
+                    <div class="phasal-product-card__quantity" data-phasal-quantity hidden>
+                      <button type="button" class="phasal-product-card__qty-button" data-phasal-qty-minus aria-label="Decrease quantity">−</button>
+                      <span class="phasal-product-card__qty-value" data-phasal-quantity-value>0</span>
+                      <button type="button" class="phasal-product-card__qty-button" data-phasal-qty-plus aria-label="Increase quantity">+</button>
+                    </div>
+                  </div>
                 {%- endif -%}
               </div>
             </div>
