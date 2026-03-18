@@ -493,11 +493,21 @@
   white-space: nowrap;
 }
 
+.phasal-collection-pills-section .phasal-section__header > :first-child {
+  max-width: 58rem;
+}
+
+.phasal-collection-pills-section .phasal-section__link {
+  align-self: center;
+  margin-left: auto;
+}
+
 .phasal-pill-list {
   display: flex;
   gap: 1.2rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
+  align-items: stretch;
 }
 
 .phasal-pill-list::-webkit-scrollbar {
@@ -507,6 +517,7 @@
 .phasal-pill {
   display: flex;
   min-width: 11rem;
+  max-width: 20rem;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
@@ -518,6 +529,13 @@
   text-align: center;
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.phasal-product-grid__item {
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+  list-style: none;
 }
 
 .phasal-pill:hover {
@@ -1250,6 +1268,14 @@
     grid-template-columns: 1fr;
   }
 
+  .phasal-collection-pills-section .phasal-section__header {
+    align-items: flex-start;
+  }
+
+  .phasal-collection-pills-section .phasal-section__link {
+    margin-left: 0;
+  }
+
   .phasal-guide-grid,
   .phasal-why-grid,
   .phasal-testimonial-grid,
@@ -1320,6 +1346,11 @@
   .phasal-product-grid,
   .phasal-story {
     grid-template-columns: 1fr;
+  }
+
+  .phasal-pill {
+    min-width: 10rem;
+    padding: 1.8rem 1.6rem;
   }
 
   .phasal-trust__item,

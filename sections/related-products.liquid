@@ -33,7 +33,7 @@
       <ul class="phasal-product-grid" role="list">
         {% assign skip_card_product_styles = false %}
         {% for recommendation in recommendations.products %}
-          <li class="grid__item">
+          <li class="phasal-product-grid__item">
             {% render 'phasal-card-product',
               card_product: recommendation,
               skip_styles: skip_card_product_styles
