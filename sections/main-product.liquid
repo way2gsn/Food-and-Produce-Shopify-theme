@@ -781,7 +781,77 @@
       </div>
     </div>
 
-    <div class="phasal-product-page__tabs" data-phasal-product-tabs>
+    
+
+    {% render 'product-media-modal', variant_images: variant_images %}
+
+    {% assign popups = section.blocks | where: 'type', 'popup' %}
+    {%- for block in popups -%}
+      <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+        <div
+          role="dialog"
+          aria-label="{{ block.settings.text }}"
+          aria-modal="true"
+          class="product-popup-modal__content"
+          tabindex="-1"
+        >
+          <button
+            id="ModalClose-{{ block.id }}"
+            type="button"
+            class="product-popup-modal__toggle"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            {{- 'icon-close.svg' | inline_asset_content -}}
+          </button>
+          <div class="product-popup-modal__content-info">
+            <h1 class="h2">{{ block.settings.page.title | escape }}</h1>
+            {{ block.settings.page.content }}
+          </div>
+        </div>
+      </modal-dialog>
+    {%- endfor -%}
+
+    {%- if product.media.size > 0 -%}
+      <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    <script>
+      (() => {
+        const root = document.querySelector('[data-phasal-product-tabs]');
+        if (!root) return;
+        const buttons = root.querySelectorAll('[data-tab-target]');
+        const panels = root.querySelectorAll('.phasal-product-page__tab-panel');
+        buttons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const target = button.getAttribute('data-tab-target');
+            buttons.forEach((item) => item.classList.toggle('is-active', item === button));
+            panels.forEach((panel) => panel.classList.toggle('is-active', panel.id === target));
+          });
+        });
+      })();
+    </script>
+
+    {%- if first_3d_model -%}
+      <script type="application/json" id="ProductJSON-{{ product.id }}">
+        {{ product.media | where: 'media_type', 'model' | json }}
+      </script>
+      <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+    {%- endif -%}
+
+    {%- liquid
+      if product.selected_or_first_available_variant.featured_media
+        assign seo_media = product.selected_or_first_available_variant.featured_media
+      else
+        assign seo_media = product.featured_media
+      endif
+    -%}
+
+    <script type="application/ld+json">
+      {{ product | structured_data }}
+    </script>
+  </div>
+  <div class="phasal-product-page__tabs" data-phasal-product-tabs>
       <div class="phasal-product-page__tabs-nav">
         <button type="button" class="phasal-product-page__tab-button is-active" data-tab-target="details-{{ section.id }}">Description</button>
         <button type="button" class="phasal-product-page__tab-button" data-tab-target="nutrition-{{ section.id }}">Nutrition</button>
@@ -882,75 +952,6 @@
         </div>
       </div>
     </div>
-
-    {% render 'product-media-modal', variant_images: variant_images %}
-
-    {% assign popups = section.blocks | where: 'type', 'popup' %}
-    {%- for block in popups -%}
-      <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
-        <div
-          role="dialog"
-          aria-label="{{ block.settings.text }}"
-          aria-modal="true"
-          class="product-popup-modal__content"
-          tabindex="-1"
-        >
-          <button
-            id="ModalClose-{{ block.id }}"
-            type="button"
-            class="product-popup-modal__toggle"
-            aria-label="{{ 'accessibility.close' | t }}"
-          >
-            {{- 'icon-close.svg' | inline_asset_content -}}
-          </button>
-          <div class="product-popup-modal__content-info">
-            <h1 class="h2">{{ block.settings.page.title | escape }}</h1>
-            {{ block.settings.page.content }}
-          </div>
-        </div>
-      </modal-dialog>
-    {%- endfor -%}
-
-    {%- if product.media.size > 0 -%}
-      <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
-      <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
-
-    <script>
-      (() => {
-        const root = document.querySelector('[data-phasal-product-tabs]');
-        if (!root) return;
-        const buttons = root.querySelectorAll('[data-tab-target]');
-        const panels = root.querySelectorAll('.phasal-product-page__tab-panel');
-        buttons.forEach((button) => {
-          button.addEventListener('click', () => {
-            const target = button.getAttribute('data-tab-target');
-            buttons.forEach((item) => item.classList.toggle('is-active', item === button));
-            panels.forEach((panel) => panel.classList.toggle('is-active', panel.id === target));
-          });
-        });
-      })();
-    </script>
-
-    {%- if first_3d_model -%}
-      <script type="application/json" id="ProductJSON-{{ product.id }}">
-        {{ product.media | where: 'media_type', 'model' | json }}
-      </script>
-      <script src="{{ 'product-model.js' | asset_url }}" defer></script>
-    {%- endif -%}
-
-    {%- liquid
-      if product.selected_or_first_available_variant.featured_media
-        assign seo_media = product.selected_or_first_available_variant.featured_media
-      else
-        assign seo_media = product.featured_media
-      endif
-    -%}
-
-    <script type="application/ld+json">
-      {{ product | structured_data }}
-    </script>
-  </div>
 </product-info>
 
 {% schema %}
