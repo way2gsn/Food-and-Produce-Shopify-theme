@@ -1,50 +1,175 @@
-.newsletter__wrapper {
-  padding-right: calc(4rem / var(--font-body-scale));
-  padding-left: calc(4rem / var(--font-body-scale));
+.phasal-newsletter-section {
+  margin: 0 auto;
 }
 
-@media screen and (min-width: 750px) {
-  .newsletter__wrapper {
-    padding-right: 9rem;
-    padding-left: 9rem;
+.phasal-newsletter-section.newsletter {
+  max-width: min(144rem, calc(100% - 4.8rem));
+}
+
+.phasal-newsletter {
+  padding: 5.4rem 3rem;
+  border: 1.5px solid #ebcb77;
+  border-radius: 3.2rem;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 239, 188, 0.72), transparent 32%),
+    radial-gradient(circle at 82% 84%, rgba(255, 243, 211, 0.68), transparent 34%),
+    linear-gradient(180deg, #fff7de 0%, #fdf2cd 100%);
+  box-shadow: 0 2rem 5rem rgba(123, 74, 30, 0.06);
+  text-align: center;
+}
+
+.phasal-newsletter__heading-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.phasal-newsletter__heading-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #c8921a;
+  font-size: clamp(2.8rem, 3vw, 4.2rem);
+  line-height: 1;
+}
+
+.phasal-newsletter__heading {
+  margin: 0;
+  color: #1a4d2e;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.4rem, 5vw, 5.8rem);
+  font-weight: 700;
+  line-height: 1.04;
+}
+
+.phasal-newsletter__subheading {
+  max-width: 73rem;
+  margin: 2rem auto 0;
+  color: #5a5647;
+  font-size: 1.55rem;
+  line-height: 1.75;
+}
+
+.phasal-newsletter__subheading p {
+  margin: 0;
+}
+
+.phasal-newsletter__form-block {
+  margin-top: 3.2rem;
+}
+
+.phasal-newsletter__field-wrapper {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.phasal-newsletter__field-wrapper .field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.phasal-newsletter__field-wrapper .field::before,
+.phasal-newsletter__field-wrapper .field::after {
+  display: none;
+}
+
+.phasal-newsletter__field-wrapper .field__input {
+  min-height: 7rem;
+  padding: 0 3rem;
+  border: 2px solid #d8d1bf;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: none;
+  color: #4a4a3a;
+  font-size: 1.8rem;
+}
+
+.phasal-newsletter__field-wrapper .field__input:focus {
+  border-color: #1a4d2e;
+  box-shadow: 0 0 0 0.4rem rgba(26, 77, 46, 0.12);
+}
+
+.phasal-newsletter__field-wrapper .field__input::placeholder {
+  color: #8a8070;
+  opacity: 1;
+}
+
+.phasal-newsletter__field-wrapper .field__label {
+  display: none;
+}
+
+.phasal-newsletter__submit {
+  position: static;
+  width: auto;
+  min-width: 22rem;
+  min-height: 7rem;
+  padding: 0 3.2rem;
+  border: 0;
+  border-radius: 999px;
+  background: #1a5a31;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  box-shadow: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.phasal-newsletter__submit:hover {
+  background: #144726;
+  transform: translateY(-1px);
+}
+
+.phasal-newsletter__submit .svg-wrapper {
+  display: none;
+}
+
+.phasal-newsletter__field-wrapper .newsletter-form__message,
+.phasal-newsletter .newsletter-form__message--success {
+  justify-content: center;
+  margin-top: 1.6rem;
+  color: #1a4d2e;
+  text-align: center;
+}
+
+@media screen and (max-width: 989px) {
+  .phasal-newsletter-section.newsletter {
+    max-width: calc(100% - 2.4rem);
+  }
+
+  .phasal-newsletter {
+    padding: 4rem 2.2rem;
+    border-radius: 2.4rem;
+  }
+
+  .phasal-newsletter__subheading {
+    font-size: 1.42rem;
   }
 }
 
-.newsletter__wrapper > * {
-  margin-top: 0;
-  margin-bottom: 0;
-}
+@media screen and (max-width: 749px) {
+  .phasal-newsletter {
+    padding: 3.2rem 1.6rem;
+  }
 
-.newsletter__wrapper > * + * {
-  margin-top: 2rem;
-}
+  .phasal-newsletter__heading-row {
+    gap: 0.8rem;
+  }
 
-.newsletter__wrapper > * + .newsletter-form {
-  margin-top: 3rem;
-}
+  .phasal-newsletter__field-wrapper .field {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
 
-.newsletter__subheading {
-  max-width: 70rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.newsletter__wrapper .newsletter-form__field-wrapper {
-  max-width: 36rem;
-}
-
-.newsletter-form__field-wrapper .newsletter-form__message {
-  margin-top: 1.5rem;
-}
-
-.newsletter__button {
-  margin-top: 3rem;
-  width: fit-content;
-}
-
-@media screen and (min-width: 750px) {
-  .newsletter__button {
-    flex-shrink: 0;
-    margin: 0 0 0 1rem;
+  .phasal-newsletter__field-wrapper .field__input,
+  .phasal-newsletter__submit {
+    min-height: 5.8rem;
+    width: 100%;
+    min-width: 0;
+    font-size: 1.6rem;
   }
 }
