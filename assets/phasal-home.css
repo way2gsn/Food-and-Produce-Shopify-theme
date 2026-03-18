@@ -572,6 +572,8 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2.2rem;
+  padding-left: 0;
+  list-style: none;
 }
 
 .phasal-product-card {
