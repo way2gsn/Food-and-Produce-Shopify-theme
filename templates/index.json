@@ -502,7 +502,7 @@
           "type": "heading",
           "settings": {
             "heading": "🌾 Join the Phasal Bazar Ganwai Family",
-            "heading_size": "h1"
+            "heading_size": "h2"
           }
         },
         "paragraph_cCM6xU": {
@@ -525,6 +525,9 @@
       "settings": {
         "color_scheme": "scheme-newsletter-cream",
         "full_width": true,
+        "heading_icon": "",
+        "email_placeholder": "Your email address...",
+        "button_label": "Subscribe Free",
         "padding_top": 60,
         "padding_bottom": 60
       }
