@@ -6,6 +6,11 @@
   list-style: none;
 }
 
+.phasal-product-grid__item {
+  min-width: 0;
+  list-style: none;
+}
+
 .phasal-product-card {
   overflow: hidden;
   border: 1.5px solid #ddd6c8;
