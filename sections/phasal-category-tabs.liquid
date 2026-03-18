@@ -1,0 +1,167 @@
+{{ 'phasal-category-tabs.css' | asset_url | stylesheet_tag }}
+
+<section class="phasal-category-tabs color-{{ section.settings.color_scheme }}">
+  <div class="phasal-category-tabs__inner">
+    <nav class="phasal-category-tabs__nav" aria-label="{{ section.settings.aria_label | escape }}">
+      {%- for block in section.blocks -%}
+        {%- assign tab_label = block.settings.label -%}
+        {%- assign tab_url = block.settings.link -%}
+
+        {%- if block.settings.collection != blank -%}
+          {%- assign tab_label = block.settings.collection.title -%}
+          {%- assign tab_url = block.settings.collection.url -%}
+        {%- endif -%}
+
+        {%- if tab_label != blank -%}
+          <a
+            class="phasal-category-tabs__link{% if block.settings.active %} phasal-category-tabs__link--active{% endif %}"
+            href="{{ tab_url | default: routes.all_products_collection_url }}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.icon != blank -%}
+              <span class="phasal-category-tabs__icon" aria-hidden="true">{{ block.settings.icon | escape }}</span>
+            {%- endif -%}
+            <span>{{ tab_label | escape }}</span>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Phasal Category Tabs",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Navigation label",
+      "default": "Product categories"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "All Products"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon or emoji",
+          "default": "🌾"
+        },
+        {
+          "type": "checkbox",
+          "id": "active",
+          "label": "Highlight as active",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Phasal Category Tabs",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "label": "All Products",
+            "icon": "🌾",
+            "active": true
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Kodo Millet",
+            "icon": "🌿"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Foxtail Millet",
+            "icon": "🟡"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Little Millet",
+            "icon": "⚪"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Barnyard Millet",
+            "icon": "🟤"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Finger Millet",
+            "icon": "🟠"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Cold-Press Oils",
+            "icon": "🫙"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Poha & Aata",
+            "icon": "🥣"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Combo Packs",
+            "icon": "🎁"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Recipes",
+            "icon": "📖"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
