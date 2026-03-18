@@ -74,7 +74,21 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign compare_price = current_variant.compare_at_price -%}
+  {%- assign brand_name = product.vendor | default: shop.name -%}
+  {%- assign product_subtitle = product.metafields.descriptors.subtitle.value | default: product.description | strip_html | truncate: 140 -%}
   <div class="page-width">
+    <div class="phasal-product-page__breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="phasal-product-page__breadcrumb-sep">›</span>
+      {%- if product.collections.first != blank -%}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title | escape }}</a>
+        <span class="phasal-product-page__breadcrumb-sep">›</span>
+      {%- endif -%}
+      <span class="phasal-product-page__breadcrumb-current">{{ product.title | escape }}</span>
+    </div>
+
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
@@ -84,6 +98,18 @@
           id="ProductInfo-{{ section.id }}"
           class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
         >
+          <div class="phasal-product-page__meta-row">
+            <div class="phasal-product-page__brand">{{ brand_name | escape }}</div>
+            <div class="phasal-product-page__share-row">
+              <button class="phasal-product-page__share-button" type="button" aria-label="Share product">
+                {{ 'icon-share.svg' | inline_asset_content }}
+              </button>
+              <button class="phasal-product-page__share-button" type="button" aria-label="Wishlist">
+                {{ 'icon-heart.svg' | inline_asset_content }}
+              </button>
+            </div>
+          </div>
+
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
           {%- for block in section.blocks -%}
@@ -100,46 +126,57 @@
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
-                  <a href="{{ product.url }}" class="product__title">
-                    <h2 class="h1">
-                      {{ product.title | escape }}
-                    </h2>
-                  </a>
                 </div>
+                {%- if product_subtitle != blank -%}
+                  <div class="phasal-product-page__subtitle">{{ product_subtitle }}</div>
+                {%- endif -%}
               {%- when 'price' -%}
-                <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                  {%- render 'price',
-                    product: product,
-                    use_variant: true,
-                    show_badges: true,
-                    price_class: 'price--large'
-                  -%}
+                <div class="phasal-product-page__rating-row">
+                  <div class="phasal-product-page__stars">★★★★★</div>
+                  <div class="phasal-product-page__rating-text">
+                    {%- if product.metafields.reviews.rating.value != blank -%}
+                      {{ product.metafields.reviews.rating.value.rating }}/{{ product.metafields.reviews.rating.value.scale_max }}
+                    {%- else -%}
+                      4.8/5
+                    {%- endif -%}
+                  </div>
+                  <div class="phasal-product-page__rating-count">
+                    ({% if product.metafields.reviews.rating_count != blank %}{{ product.metafields.reviews.rating_count }}{% else %}124{% endif %} reviews)
+                  </div>
                 </div>
-                {%- if product.quantity_price_breaks_configured? -%}
-                  <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
-                    <span>{{ 'products.product.volume_pricing.note' | t }}</span>
+
+                <div class="phasal-product-page__badge-row">
+                  <span class="phasal-product-page__badge phasal-product-page__badge--verified">Verified</span>
+                  <span class="phasal-product-page__badge phasal-product-page__badge--lab">Lab Tested</span>
+                  <span class="phasal-product-page__badge phasal-product-page__badge--farm">Farm Direct</span>
+                </div>
+
+                <div class="phasal-product-page__price-card" {{ block.shopify_attributes }}>
+                  <div>
+                    <div id="price-{{ section.id }}" role="status" class="phasal-product-page__price-main">
+                      {%- render 'price',
+                        product: product,
+                        use_variant: true,
+                        show_badges: false,
+                        price_class: 'price--large'
+                      -%}
+                    </div>
+                    <div class="phasal-product-page__price-meta">
+                      {%- if compare_price > current_variant.price -%}
+                        <span class="phasal-product-page__save">
+                          Save {{ compare_price | minus: current_variant.price | money }}
+                        </span>
+                      {%- endif -%}
+                      <span class="phasal-product-page__unit">Inclusive of taxes</span>
+                    </div>
                   </div>
-                {%- endif -%}
-                {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
-                  <div class="product__tax caption rte">
-                    {%- if cart.duties_included and cart.taxes_included -%}
-                      {{ 'products.product.duties_and_taxes_included' | t }}
-                    {%- elsif cart.taxes_included -%}
-                      {{ 'products.product.taxes_included' | t }}
-                    {%- elsif cart.duties_included -%}
-                      {{ 'products.product.duties_included' | t }}
-                    {%- endif -%}
-                    {%- if shop.shipping_policy.body != blank -%}
-                      {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                    {%- endif -%}
+                  <div class="phasal-product-page__stock-side">
+                    <div class="phasal-product-page__stock-indicator">
+                      <span class="phasal-product-page__stock-dot"></span>
+                      {%- if current_variant.available -%}In stock{%- else -%}Sold out{%- endif -%}
+                    </div>
+                    <div class="phasal-product-page__stock-note">Freshly packed and dispatched fast</div>
                   </div>
-                {%- endif -%}
-                <div {{ block.shopify_attributes }}>
-                  {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
-                  {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
-                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    {{ form | payment_terms }}
-                  {%- endform -%}
                 </div>
               {%- when 'inventory' -%}
                 <p
@@ -696,52 +733,152 @@
               {%- endfor -%}
             </div>
           {%- endif -%}
-          <a href="{{ product.url }}" class="link product__view-details animate-arrow">
-            {{ 'products.product.view_full_details' | t }}
-            {{- 'icon-arrow.svg' | inline_asset_content -}}
-          </a>
+
+          <div class="phasal-product-page__delivery-row">
+            <div class="phasal-product-page__delivery-item">
+              <div class="phasal-product-page__delivery-icon">🚚</div>
+              <div>
+                <h4>Fast Delivery</h4>
+                <p>Free delivery above Rs. 499</p>
+              </div>
+            </div>
+            <div class="phasal-product-page__delivery-item">
+              <div class="phasal-product-page__delivery-icon">🌿</div>
+              <div>
+                <h4>Organic Promise</h4>
+                <p>Stone-ground and unpolished</p>
+              </div>
+            </div>
+            <div class="phasal-product-page__delivery-item">
+              <div class="phasal-product-page__delivery-icon">🧪</div>
+              <div>
+                <h4>Lab Tested</h4>
+                <p>Purity checked in every batch</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="phasal-product-page__feature-grid">
+            <div class="phasal-product-page__feature-item"><span>🌾</span><div><h4>Ancient Grain</h4><p>Traditional nutrition with slow energy release</p></div></div>
+            <div class="phasal-product-page__feature-item"><span>🫶</span><div><h4>Farm Direct</h4><p>Sourced from farmer groups in Chhattisgarh</p></div></div>
+            <div class="phasal-product-page__feature-item"><span>🍲</span><div><h4>Easy to Cook</h4><p>Works for khichdi, pulao, porridge and bowls</p></div></div>
+            <div class="phasal-product-page__feature-item"><span>💚</span><div><h4>Clean Label</h4><p>No polish, no additives, no shortcuts</p></div></div>
+          </div>
+
+          <div class="phasal-product-page__social-proof">
+            <div class="phasal-product-page__avatars">
+              <span>🌿</span>
+              <span>🧑🏽</span>
+              <span>👩🏽</span>
+            </div>
+            <div>
+              <h4>Trusted by mindful families across India</h4>
+              <p>Chosen for everyday millet meals, porridges and clean pantry staples.</p>
+            </div>
+            <div class="phasal-product-page__social-fire">🔥</div>
+          </div>
         </section>
       </div>
     </div>
 
-    <div class="phasal-product__extras">
-      <div class="phasal-product__section">
-        <h2>{{ section.settings.details_heading }}</h2>
-        <p>
-          {%- if section.settings.details_text != blank -%}
-            {{ section.settings.details_text }}
-          {%- else -%}
-            {{ product.description | strip_html | truncate: 240 }}
-          {%- endif -%}
-        </p>
+    <div class="phasal-product-page__tabs" data-phasal-product-tabs>
+      <div class="phasal-product-page__tabs-nav">
+        <button type="button" class="phasal-product-page__tab-button is-active" data-tab-target="details-{{ section.id }}">Description</button>
+        <button type="button" class="phasal-product-page__tab-button" data-tab-target="nutrition-{{ section.id }}">Nutrition</button>
+        <button type="button" class="phasal-product-page__tab-button" data-tab-target="reviews-{{ section.id }}">Reviews</button>
+        <button type="button" class="phasal-product-page__tab-button" data-tab-target="story-{{ section.id }}">Farm Story</button>
       </div>
 
-      <div class="phasal-product__section phasal-product__story">
-        <div class="phasal-product__story-image">
-          {%- if section.settings.story_image != blank -%}
-            {{
-              section.settings.story_image
-              | image_url: width: 1600
-              | image_tag:
-                widths: '540, 900, 1200, 1600',
-                sizes: '(max-width: 989px) 100vw, 50vw',
-                loading: 'lazy'
-            }}
-          {%- else -%}
-            <img src="{{ 'farm_banner.png' | asset_url }}" alt="{{ section.settings.story_heading | escape }}">
-          {%- endif -%}
-        </div>
-        <div>
-          <h2>{{ section.settings.story_heading }}</h2>
-          <p>{{ section.settings.story_text }}</p>
+      <div class="phasal-product-page__tab-panel is-active" id="details-{{ section.id }}">
+        <div class="phasal-product-page__description-grid">
+          <div class="phasal-product-page__description-copy">
+            <h3>{{ section.settings.details_heading }}</h3>
+            <div class="rte">
+              {%- if section.settings.details_text != blank -%}
+                {{ section.settings.details_text }}
+              {%- else -%}
+                {{ product.description }}
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="phasal-product-page__description-image">
+            {%- if product.featured_media != blank -%}
+              {{
+                product.featured_media.preview_image
+                | image_url: width: 1200
+                | image_tag:
+                  widths: '540, 900, 1200',
+                  sizes: '(max-width: 989px) 100vw, 40vw',
+                  loading: 'lazy',
+                  alt: product.title
+              }}
+            {%- else -%}
+              <img src="{{ 'kodo_millet.png' | asset_url }}" alt="{{ product.title | escape }}">
+            {%- endif -%}
+            <div class="phasal-product-page__description-tag">
+              <div class="phasal-product-page__description-tag-title">{{ product.title | escape }}</div>
+              <div class="phasal-product-page__description-tag-copy">Sourced direct and minimally processed</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="phasal-product__section">
-        <h2>{{ section.settings.reviews_heading }}</h2>
-        <div class="phasal-product__reviews">
-          <div class="phasal-product__review">{{ section.settings.review_1 }}</div>
-          <div class="phasal-product__review">{{ section.settings.review_2 }}</div>
+      <div class="phasal-product-page__tab-panel" id="nutrition-{{ section.id }}">
+        <div class="phasal-product-page__nutrition-grid">
+          <div class="phasal-product-page__nutrition-card">
+            <div class="phasal-product-page__nutrition-head">
+              <h3>Nutrition Snapshot</h3>
+              <p>Approximate values per 100g</p>
+            </div>
+            <div class="phasal-product-page__nutrition-row"><span>Energy</span><strong>353 kcal</strong></div>
+            <div class="phasal-product-page__nutrition-row"><span>Protein</span><strong>8.3 g</strong></div>
+            <div class="phasal-product-page__nutrition-row"><span>Dietary Fiber</span><strong>9 g</strong></div>
+            <div class="phasal-product-page__nutrition-row"><span>Iron</span><strong>1.7 mg</strong></div>
+            <div class="phasal-product-page__nutrition-row"><span>Calcium</span><strong>27 mg</strong></div>
+            <div class="phasal-product-page__nutrition-row"><span>Low Glycemic Load</span><strong>Yes</strong></div>
+          </div>
+          <div class="phasal-product-page__nutrition-benefits">
+            <div class="phasal-product-page__nutrition-benefit"><span>💪</span><div><h4>Steady Energy</h4><p>Complex carbohydrates help support sustained fullness and balanced meals.</p></div></div>
+            <div class="phasal-product-page__nutrition-benefit"><span>🌾</span><div><h4>Higher Fiber</h4><p>A great pantry staple for wholesome khichdi, bowls and porridges.</p></div></div>
+            <div class="phasal-product-page__nutrition-benefit"><span>🌿</span><div><h4>Minimal Processing</h4><p>Traditional cleaning and packing keeps the grain close to its natural form.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phasal-product-page__tab-panel" id="reviews-{{ section.id }}">
+        <div class="phasal-product-page__reviews-grid">
+          <div class="phasal-product-page__reviews-summary">
+            <div class="phasal-product-page__reviews-score">4.8</div>
+            <div class="phasal-product-page__reviews-stars">★★★★★</div>
+            <div class="phasal-product-page__reviews-caption">Based on verified buyers</div>
+          </div>
+          <div class="phasal-product-page__reviews-list">
+            <div class="phasal-product-page__review-card">{{ section.settings.review_1 }}</div>
+            <div class="phasal-product-page__review-card">{{ section.settings.review_2 }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phasal-product-page__tab-panel" id="story-{{ section.id }}">
+        <div class="phasal-product-page__story-grid">
+          <div class="phasal-product-page__story-image">
+            {%- if section.settings.story_image != blank -%}
+              {{
+                section.settings.story_image
+                | image_url: width: 1600
+                | image_tag:
+                  widths: '540, 900, 1200, 1600',
+                  sizes: '(max-width: 989px) 100vw, 50vw',
+                  loading: 'lazy'
+              }}
+            {%- else -%}
+              <img src="{{ 'farm_banner.png' | asset_url }}" alt="{{ section.settings.story_heading | escape }}">
+            {%- endif -%}
+          </div>
+          <div class="phasal-product-page__story-copy">
+            <h3>{{ section.settings.story_heading }}</h3>
+            <p>{{ section.settings.story_text }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -778,6 +915,22 @@
       <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <script>
+      (() => {
+        const root = document.querySelector('[data-phasal-product-tabs]');
+        if (!root) return;
+        const buttons = root.querySelectorAll('[data-tab-target]');
+        const panels = root.querySelectorAll('.phasal-product-page__tab-panel');
+        buttons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const target = button.getAttribute('data-tab-target');
+            buttons.forEach((item) => item.classList.toggle('is-active', item === button));
+            panels.forEach((panel) => panel.classList.toggle('is-active', panel.id === target));
+          });
+        });
+      })();
+    </script>
 
     {%- if first_3d_model -%}
       <script type="application/json" id="ProductJSON-{{ product.id }}">

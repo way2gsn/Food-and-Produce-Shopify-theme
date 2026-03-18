@@ -1,13 +1,58 @@
 .phasal-product-page {
-  background: #f7f5ef;
+  --phasal-g1: #1a4d2e;
+  --phasal-g2: #2d6a40;
+  --phasal-g3: #4a8c5c;
+  --phasal-gl: #d6ead9;
+  --phasal-br: #7b4a1e;
+  --phasal-cr: #f7f3eb;
+  --phasal-cr2: #ede6d6;
+  --phasal-gd: #c8921a;
+  --phasal-gdl: #fdf3de;
+  --phasal-ea: #8b6340;
+  --phasal-wh: #ffffff;
+  --phasal-td: #1a1a1a;
+  --phasal-tm: #4a4a3a;
+  --phasal-ts: #8a8070;
+  --phasal-bd: #ddd6c8;
+  --phasal-shadow-sm: 0 2px 12px rgba(26, 77, 46, 0.07);
+  --phasal-shadow-md: 0 8px 32px rgba(26, 77, 46, 0.12);
+  --phasal-shadow-lg: 0 20px 60px rgba(26, 77, 46, 0.16);
+  background: var(--phasal-cr);
 }
 
 .phasal-product-page .page-width {
-  max-width: 1200px;
+  max-width: 1320px;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.phasal-product-page__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  padding: 1.2rem 0 2.8rem;
+}
+
+.phasal-product-page__breadcrumb a {
+  color: var(--phasal-ts);
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+.phasal-product-page__breadcrumb-current,
+.phasal-product-page__brand {
+  color: var(--phasal-g1);
+  font-weight: 700;
+}
+
+.phasal-product-page__breadcrumb-sep {
+  color: var(--phasal-bd);
+  font-size: 1.2rem;
 }
 
 .phasal-product-page .product {
-  gap: 5rem;
+  gap: 5.6rem;
   align-items: start;
 }
 
@@ -16,93 +61,305 @@
   padding-top: 0;
 }
 
-.phasal-product-page .product__media-item,
-.phasal-product-page .product__media img,
-.phasal-product-page .product__media video,
-.phasal-product-page .product__media iframe {
-  border-radius: 2rem;
+.phasal-product-page media-gallery {
+  position: sticky;
+  top: 9rem;
 }
 
 .phasal-product-page .product__media {
-  border: 1px solid #e6e2d9;
-  border-radius: 2rem;
+  border: 1.5px solid var(--phasal-bd);
+  border-radius: 3.2rem;
   overflow: hidden;
-  background: #fff;
+  background: var(--phasal-cr);
+}
+
+.phasal-product-page .product__media img,
+.phasal-product-page .product__media video,
+.phasal-product-page .product__media iframe,
+.phasal-product-page .product__media-item,
+.phasal-product-page .deferred-media {
+  border-radius: 3.2rem;
 }
 
 .phasal-product-page .thumbnail-list {
   gap: 1rem;
+  margin-top: 1.2rem;
 }
 
 .phasal-product-page .thumbnail {
-  border-radius: 1rem;
-  border: 1px solid #e6e2d9;
+  border-radius: 1.6rem;
+  border: 2px solid transparent;
   overflow: hidden;
+  background: var(--phasal-cr2);
+}
+
+.phasal-product-page .thumbnail[aria-current='true'] {
+  border-color: var(--phasal-g1);
 }
 
 .phasal-product-page .product__info-container {
   padding: 0;
 }
 
-.phasal-product-page .product__text,
-.phasal-product-page .product__inventory,
-.phasal-product-page .product__tax,
-.phasal-product-page .product__sku,
-.phasal-product-page .share-button__button {
-  color: #777;
+.phasal-product-page__meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
-.phasal-product-page .product__title h1,
-.phasal-product-page .product__title .h1 {
-  margin: 1rem 0;
-  color: #1f3d2b;
-  font-size: 3.6rem;
-  line-height: 1.15;
+.phasal-product-page__brand {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--phasal-br);
+}
+
+.phasal-product-page__share-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.phasal-product-page__share-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border: 1px solid var(--phasal-bd);
+  border-radius: 999px;
+  background: var(--phasal-cr2);
+  color: var(--phasal-tm);
+}
+
+.phasal-product-page__share-button .icon,
+.phasal-product-page__share-button svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.phasal-product-page .product__title h1 {
+  margin: 0 0 0.6rem;
+  color: var(--phasal-g1);
   font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 3vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.12;
+}
+
+.phasal-product-page__subtitle {
+  margin-bottom: 1.6rem;
+  color: var(--phasal-ts);
+  font-size: 1.5rem;
+  line-height: 1.55;
+}
+
+.phasal-product-page__rating-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.phasal-product-page__stars {
+  color: #f5a623;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+}
+
+.phasal-product-page__rating-text {
+  color: var(--phasal-td);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.phasal-product-page__rating-count {
+  color: var(--phasal-ts);
+  font-size: 1.3rem;
+}
+
+.phasal-product-page__badge-row {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.phasal-product-page__badge {
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.phasal-product-page__badge--verified {
+  background: var(--phasal-gl);
+  color: var(--phasal-g1);
+}
+
+.phasal-product-page__badge--lab {
+  background: var(--phasal-gdl);
+  color: var(--phasal-gd);
+}
+
+.phasal-product-page__badge--farm {
+  background: var(--phasal-cr2);
+  color: var(--phasal-br);
+}
+
+.phasal-product-page__price-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.4rem;
+  padding: 2rem 2.4rem;
+  border: 1.5px solid var(--phasal-bd);
+  border-radius: 2.4rem;
+  background: linear-gradient(135deg, var(--phasal-cr2), #f0ebe0);
 }
 
 .phasal-product-page .price {
-  color: #1f3d2b;
+  color: var(--phasal-g1);
 }
 
-.phasal-product-page .price-item {
-  font-size: 2.8rem;
+.phasal-product-page .price-item--sale,
+.phasal-product-page .price-item--regular {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.6rem;
+  font-weight: 800;
+  color: var(--phasal-g1);
+}
+
+.phasal-product-page .price__sale .price-item--regular,
+.phasal-product-page s.price-item--regular {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.8rem;
+  color: var(--phasal-ts);
+}
+
+.phasal-product-page__price-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.phasal-product-page__save {
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  background: #e8f5e9;
+  color: #1b5e20;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.phasal-product-page__unit,
+.phasal-product-page__stock-note {
+  color: var(--phasal-ts);
+  font-size: 1.2rem;
+}
+
+.phasal-product-page__stock-side {
+  text-align: right;
+}
+
+.phasal-product-page__stock-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--phasal-g2);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.phasal-product-page__stock-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: var(--phasal-g3);
+}
+
+.phasal-product-page .product-form__input {
+  margin-bottom: 2.2rem;
+}
+
+.phasal-product-page .product-form__input .form__label,
+.phasal-product-page .quantity__label {
+  margin-bottom: 1rem;
+  color: var(--phasal-td);
+  font-size: 1.3rem;
   font-weight: 700;
 }
 
 .phasal-product-page .product-form__input--pill input[type='radio'] + label {
-  border-radius: 2rem;
-  border-color: #e6e2d9;
-  background: #fff;
+  min-height: 4.2rem;
+  padding: 0.9rem 1.8rem;
+  border: 2px solid var(--phasal-bd);
+  border-radius: 999px;
+  background: var(--phasal-wh);
+  color: var(--phasal-td);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.phasal-product-page .product-form__input--pill input[type='radio'] + label:hover {
+  border-color: var(--phasal-g3);
+  color: var(--phasal-g1);
 }
 
 .phasal-product-page .product-form__input--pill input[type='radio']:checked + label {
-  background: #1f3d2b;
-  border-color: #1f3d2b;
+  background: var(--phasal-g1);
+  border-color: var(--phasal-g1);
   color: #fff;
+  box-shadow: 0 4px 14px rgba(26, 77, 46, 0.25);
 }
 
 .phasal-product-page .quantity {
-  border-radius: 3rem;
+  border: 1.5px solid var(--phasal-bd);
+  border-radius: 999px;
+  overflow: hidden;
 }
 
 .phasal-product-page .quantity__button,
 .phasal-product-page .quantity__input {
-  min-height: 4.6rem;
+  min-height: 4.2rem;
+}
+
+.phasal-product-page .quantity__button {
+  width: 4rem;
+}
+
+.phasal-product-page .quantity__button:hover {
+  background: var(--phasal-gl);
 }
 
 .phasal-product-page .product-form__buttons {
-  display: flex;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
   align-items: stretch;
 }
 
 .phasal-product-page .product-form__submit {
-  flex: 1;
-  min-height: 5.2rem;
-  border-radius: 3rem;
-  background: #1f3d2b;
-  border-color: #1f3d2b;
+  min-height: 5.4rem;
+  border-radius: 999px;
+  background: var(--phasal-g1);
+  border-color: var(--phasal-g1);
+  box-shadow: 0 6px 24px rgba(26, 77, 46, 0.3);
+}
+
+.phasal-product-page .product-form__submit:hover {
+  background: var(--phasal-g2);
+  border-color: var(--phasal-g2);
 }
 
 .phasal-product-page .shopify-payment-button {
@@ -110,10 +367,7 @@
 }
 
 .phasal-product__bulk {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 }
 
 .phasal-product__bulk-link {
@@ -121,89 +375,430 @@
   align-items: center;
   justify-content: center;
   min-height: 5.2rem;
-  padding: 1.2rem 1.8rem;
-  border: 1.5px solid #1f3d2b;
-  border-radius: 3rem;
-  color: #1f3d2b;
+  padding: 1.2rem 2rem;
+  border: 1.5px solid var(--phasal-g1);
+  border-radius: 999px;
+  color: var(--phasal-g1);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
 }
 
 .phasal-product__bulk-note {
-  color: #777;
-  font-size: 1.35rem;
+  margin-top: 1rem;
+  color: var(--phasal-ts);
+  font-size: 1.25rem;
   line-height: 1.6;
 }
 
-.phasal-product__badges {
+.phasal-product-page__delivery-row {
   display: flex;
+  gap: 1.6rem;
   flex-wrap: wrap;
+  margin: 2.4rem 0 2.2rem;
+  padding: 1.6rem 2rem;
+  border: 1.5px solid var(--phasal-bd);
+  border-radius: 2.4rem;
+  background: var(--phasal-wh);
+}
+
+.phasal-product-page__delivery-item,
+.phasal-product-page__feature-item,
+.phasal-product-page__nutrition-benefit {
+  display: flex;
+  align-items: flex-start;
   gap: 1rem;
-  margin-top: 1.8rem;
 }
 
-.phasal-product__badge {
-  padding: 0.6rem 1.2rem;
-  border: 1px solid #e6e2d9;
-  border-radius: 2rem;
-  background: #fff;
-  font-size: 1.3rem;
+.phasal-product-page__delivery-item {
+  flex: 1;
+  min-width: 16rem;
 }
 
-.phasal-product__extras {
-  display: grid;
-  gap: 6rem;
-  margin-top: 6rem;
+.phasal-product-page__delivery-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 1rem;
+  background: var(--phasal-gl);
+  font-size: 1.7rem;
+  flex-shrink: 0;
 }
 
-.phasal-product__section h2 {
-  margin: 0 0 1rem;
-  color: #1f3d2b;
-  font-size: 3rem;
-  font-family: 'Playfair Display', serif;
+.phasal-product-page__delivery-item h4,
+.phasal-product-page__feature-item h4,
+.phasal-product-page__nutrition-benefit h4,
+.phasal-product-page__social-proof h4 {
+  color: var(--phasal-td);
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
-.phasal-product__section p {
-  color: #777;
-  font-size: 1.6rem;
-  line-height: 1.7;
+.phasal-product-page__delivery-item p,
+.phasal-product-page__feature-item p,
+.phasal-product-page__nutrition-benefit p,
+.phasal-product-page__social-proof p {
+  color: var(--phasal-ts);
+  font-size: 1.15rem;
+  line-height: 1.5;
 }
 
-.phasal-product__story {
+.phasal-product-page__feature-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.4rem;
 }
 
-.phasal-product__story-image img {
+.phasal-product-page__feature-item {
+  padding: 1.2rem 1.4rem;
+  border: 1.5px solid var(--phasal-bd);
+  border-radius: 1.6rem;
+  background: var(--phasal-wh);
+}
+
+.phasal-product-page__feature-item > span {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.phasal-product-page__social-proof {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.6rem 2.2rem;
+  border-radius: 2.4rem;
+  background: linear-gradient(120deg, var(--phasal-g1), var(--phasal-g2));
+}
+
+.phasal-product-page__avatars {
+  display: flex;
+}
+
+.phasal-product-page__avatars span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin-right: -0.8rem;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: var(--phasal-gl);
+  font-size: 1.5rem;
+}
+
+.phasal-product-page__social-proof h4 {
+  color: #fff;
+}
+
+.phasal-product-page__social-proof p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.phasal-product-page__social-fire {
+  margin-left: auto;
+  font-size: 2.6rem;
+}
+
+.phasal-product-page__tabs {
+  margin-top: 4.8rem;
+  border-top: 1px solid var(--phasal-bd);
+  border-bottom: 1px solid var(--phasal-bd);
+  background: var(--phasal-wh);
+}
+
+.phasal-product-page__tabs-nav {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--phasal-bd);
+}
+
+.phasal-product-page__tabs-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.phasal-product-page__tab-button {
+  padding: 1.6rem 2.4rem;
+  border: 0;
+  border-bottom: 2.5px solid transparent;
+  background: none;
+  color: var(--phasal-ts);
+  font-size: 1.4rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.phasal-product-page__tab-button.is-active {
+  color: var(--phasal-g1);
+  border-bottom-color: var(--phasal-gd);
+}
+
+.phasal-product-page__tab-panel {
+  display: none;
+  padding: 4.8rem 0;
+}
+
+.phasal-product-page__tab-panel.is-active {
+  display: block;
+}
+
+.phasal-product-page__description-grid,
+.phasal-product-page__nutrition-grid,
+.phasal-product-page__story-grid,
+.phasal-product-page__reviews-grid {
+  display: grid;
+  gap: 4.8rem;
+}
+
+.phasal-product-page__description-grid,
+.phasal-product-page__story-grid {
+  grid-template-columns: 1.1fr 1fr;
+  align-items: start;
+}
+
+.phasal-product-page__nutrition-grid {
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+.phasal-product-page__reviews-grid {
+  grid-template-columns: 32rem 1fr;
+  align-items: start;
+}
+
+.phasal-product-page__description-copy h3,
+.phasal-product-page__story-copy h3 {
+  margin: 0 0 1.6rem;
+  color: var(--phasal-g1);
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  line-height: 1.15;
+}
+
+.phasal-product-page__description-copy .rte,
+.phasal-product-page__story-copy p,
+.phasal-product-page__review-card {
+  color: var(--phasal-tm);
+  font-size: 1.5rem;
+  line-height: 1.75;
+}
+
+.phasal-product-page__description-image,
+.phasal-product-page__story-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3.2rem;
+}
+
+.phasal-product-page__description-image img,
+.phasal-product-page__story-image img {
   width: 100%;
-  border-radius: 2rem;
+  height: 36rem;
   object-fit: cover;
 }
 
-.phasal-product__reviews {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
+.phasal-product-page__description-tag {
+  position: absolute;
+  left: 1.6rem;
+  bottom: 1.6rem;
+  padding: 1.2rem 1.6rem;
+  border-radius: 1.6rem;
+  background: rgba(255, 255, 255, 0.92);
 }
 
-.phasal-product__review {
-  padding: 2rem;
-  border: 1px solid #e6e2d9;
+.phasal-product-page__description-tag-title {
+  color: var(--phasal-g1);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.phasal-product-page__description-tag-copy {
+  color: var(--phasal-ts);
+  font-size: 1.2rem;
+}
+
+.phasal-product-page__nutrition-card,
+.phasal-product-page__reviews-summary {
+  overflow: hidden;
+  border: 1.5px solid var(--phasal-bd);
+  border-radius: 3.2rem;
+  background: var(--phasal-wh);
+}
+
+.phasal-product-page__nutrition-head {
+  padding: 2rem 2.4rem;
+  background: var(--phasal-g1);
+}
+
+.phasal-product-page__nutrition-head h3 {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.phasal-product-page__nutrition-head p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1.3rem;
+}
+
+.phasal-product-page__nutrition-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem 2.4rem;
+  border-bottom: 1px solid var(--phasal-bd);
+  color: var(--phasal-tm);
+  font-size: 1.4rem;
+}
+
+.phasal-product-page__nutrition-row:last-child {
+  border-bottom: 0;
+}
+
+.phasal-product-page__nutrition-row:nth-child(even) {
+  background: var(--phasal-cr);
+}
+
+.phasal-product-page__nutrition-row strong {
+  color: var(--phasal-td);
+}
+
+.phasal-product-page__nutrition-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.phasal-product-page__nutrition-benefit {
+  padding: 2rem 2.2rem;
+  border: 1.5px solid var(--phasal-bd);
+  border-radius: 2.4rem;
+  background: var(--phasal-wh);
+}
+
+.phasal-product-page__nutrition-benefit > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 4.8rem;
   border-radius: 1.6rem;
-  background: #fff;
-  color: #333;
-  font-size: 1.45rem;
-  line-height: 1.65;
+  background: var(--phasal-gl);
+  font-size: 2.4rem;
+  flex-shrink: 0;
+}
+
+.phasal-product-page__reviews-summary {
+  position: sticky;
+  top: 11rem;
+  padding: 3.2rem;
+  text-align: center;
+}
+
+.phasal-product-page__reviews-score {
+  color: var(--phasal-g1);
+  font-family: 'Playfair Display', serif;
+  font-size: 7.2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.phasal-product-page__reviews-stars {
+  margin: 0.8rem 0;
+  color: #f5a623;
+  font-size: 2.8rem;
+}
+
+.phasal-product-page__reviews-caption {
+  color: var(--phasal-ts);
+  font-size: 1.4rem;
+}
+
+.phasal-product-page__reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.phasal-product-page__review-card {
+  padding: 2.8rem;
+  border: 1.5px solid var(--phasal-bd);
+  border-radius: 3.2rem;
+  background: var(--phasal-wh);
+}
+
+@media screen and (max-width: 1200px) {
+  .phasal-product-page .page-width {
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+  }
 }
 
 @media screen and (max-width: 989px) {
   .phasal-product-page .product,
-  .phasal-product__story,
-  .phasal-product__reviews {
+  .phasal-product-page__description-grid,
+  .phasal-product-page__nutrition-grid,
+  .phasal-product-page__story-grid,
+  .phasal-product-page__reviews-grid {
     grid-template-columns: 1fr;
+  }
+
+  .phasal-product-page media-gallery,
+  .phasal-product-page__reviews-summary {
+    position: static;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .phasal-product-page .page-width {
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+  }
+
+  .phasal-product-page__price-card,
+  .phasal-product-page__delivery-row,
+  .phasal-product-page__social-proof {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .phasal-product-page__stock-side {
+    text-align: left;
+  }
+
+  .phasal-product-page__feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .phasal-product-page__tab-panel {
+    padding: 3.2rem 0;
+  }
+
+  .phasal-product-page__description-copy h3,
+  .phasal-product-page__story-copy h3 {
+    font-size: 2.6rem;
+  }
+
+  .phasal-product-page .product__media,
+  .phasal-product-page .product__media img,
+  .phasal-product-page .product__media-item,
+  .phasal-product-page .deferred-media,
+  .phasal-product-page__description-image,
+  .phasal-product-page__story-image,
+  .phasal-product-page__nutrition-card,
+  .phasal-product-page__reviews-summary,
+  .phasal-product-page__review-card {
+    border-radius: 2.4rem;
+  }
+
+  .phasal-product-page__description-image img,
+  .phasal-product-page__story-image img {
+    height: 28rem;
   }
 }
