@@ -4,7 +4,7 @@
 
 .phasal-collection-page .page-width {
   max-width: min(144rem, calc(100% - 4.8rem));
-  padding: 10px;
+  padding-top: 10px;
 }
 
 .phasal-collection-shell {
