@@ -752,39 +752,6 @@
   box-shadow: 0 10px 32px rgba(200,146,26,.38) !important;
 }
 
-/* Bulk order link */
-.phasal-product__bulk { margin-top: 1.2rem; }
-
-.phasal-product__bulk-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 5rem;
-  padding: 1.2rem 2rem;
-  border: 1.5px solid var(--pp-g1);
-  border-radius: 999px;
-  color: var(--pp-g1);
-  font-size: 1.4rem;
-  font-weight: 700;
-  text-decoration: none;
-  background: transparent;
-  transition: background .2s, color .2s, transform .2s var(--pp-ease);
-}
-
-.phasal-product__bulk-link:hover {
-  background: var(--pp-g1);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.phasal-product__bulk-note {
-  margin-top: 1rem;
-  color: var(--pp-ts);
-  font-size: 1.25rem;
-  line-height: 1.6;
-}
-
 /* ─────────────────────────────────────────
    15. DELIVERY ROW
 ───────────────────────────────────────── */

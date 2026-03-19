@@ -544,16 +544,6 @@
                     section_id: section.id,
                     show_pickup_availability: true
                   -%}
-                  {%- if section.settings.bulk_order_label != blank -%}
-                    <div class="phasal-product__bulk">
-                      <a class="phasal-product__bulk-link" href="{{ section.settings.bulk_order_link | default: routes.root_url }}">
-                        {{ section.settings.bulk_order_label | escape }}
-                      </a>
-                    </div>
-                  {%- endif -%}
-                  {%- if section.settings.bulk_order_note != blank -%}
-                    <div class="phasal-product__bulk-note">{{ section.settings.bulk_order_note }}</div>
-                  {%- endif -%}
                 </div>
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
